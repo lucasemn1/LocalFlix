@@ -1,18 +1,17 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import { Video } from "./Video";
 
 @Entity()
 export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  name: string;
 
-    @Column()
-    firstName: string;
+  @Column()
+  nickname: string;
 
-    @Column()
-    lastName: string;
-
-    @Column()
-    age: number;
-
+  @ManyToMany(type => Video, videos => videos.usersWhoWatched)
+  videosWatched: Array<Video>;
 }
