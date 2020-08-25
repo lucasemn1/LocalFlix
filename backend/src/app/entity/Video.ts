@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { User } from "./User";
 import { Serie } from "./Serie";
 
-@Entity()
+@Entity({ name: 'videos' })
 export class Video {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,14 +11,11 @@ export class Video {
   title: string;
 
   @Column()
-  path: string;
-
-  @Column()
   number: number;
 
-  @ManyToMany(type => User, users => users.videosWatched)
-  usersWhoWatched: Array<User>;
+  @Column()
+  format: string;
 
-  @ManyToMany(type => Serie)
+  @ManyToOne(type => Serie, serie => serie.videos)
   serie: Serie;
 }

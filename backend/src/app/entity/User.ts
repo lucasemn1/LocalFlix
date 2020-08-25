@@ -1,7 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
 import { Video } from "./Video";
 
-@Entity()
+@Entity({ name: 'users' })
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
@@ -12,6 +12,7 @@ export class User {
   @Column()
   nickname: string;
 
-  @ManyToMany(type => Video, videos => videos.usersWhoWatched)
+  @ManyToMany(type => Video)
+  @JoinTable()
   videosWatched: Array<Video>;
 }
