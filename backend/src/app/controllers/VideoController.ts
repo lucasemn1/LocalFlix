@@ -7,21 +7,27 @@ export class VideoController {
   static async get(request: Request, response: Response): Promise<Response> {
     const { serie } = request.params;
     const { ep } = request.params;
+    const { season } = request.params;
 
     const connection = await createConnection();
 
     try {
       const video = await connection.getRepository(Video)
         .createQueryBuilder('videos')
-        .leftJoinAndSelect('videos.serie', 'series')
+        .leftJoinAndSelect('videos.season', 'seasons')
+        .leftJoinAndSelect('seasons.serie', 'series')
         .where(`series.urlName LIKE :urlName`, { urlName: serie })
+        .andWhere('seasons.number = :season', { season })
         .andWhere(`videos.number = :ep`, { ep })
         .getOne();
 
-
       await connection.close();
 
-      const epPath: string = `${video.serie.epsPath}/${video.number}.${video.format}`;
+      if(!video) {
+        return response.status(404).json({ err: 'Video was not found.' });
+      }
+
+      const epPath: string = `${video.season.epsPath}/${video.number}.${video.format}`;
 
       fs.stat(epPath, (err, stats) => {
         if (err) {
@@ -55,6 +61,7 @@ export class VideoController {
       });
     }
     catch (err) {
+      console.log(err);
       await connection.close();
       return response.status(500).json({ err });
     }

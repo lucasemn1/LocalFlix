@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Media } from "../interfaces/Media";
 import { Video } from "./Video";
+import { Season } from "./Season";
 
 @Entity({ name: 'series' })
 export class Serie implements Media {
@@ -16,9 +17,6 @@ export class Serie implements Media {
   @Column()
   urlName: string;
 
-  @Column()
-  epsPath: string;
-
-  @OneToMany(type => Video, video => video.serie)
-  videos: Array<Video>;
+  @OneToMany(type => Season, season => season.serie)
+  seasons: Array<Season>
 }
