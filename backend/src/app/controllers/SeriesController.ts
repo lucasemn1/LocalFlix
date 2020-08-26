@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
 import { Serie } from '../entity/Serie';
 
-export class SerieController {
+export class SeriesController {
   static async index(request: Request, response: Response): Promise<Response> {
 
     const connection = await createConnection();

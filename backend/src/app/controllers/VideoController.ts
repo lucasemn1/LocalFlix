@@ -61,7 +61,6 @@ export class VideoController {
       });
     }
     catch (err) {
-      console.log(err);
       await connection.close();
       return response.status(500).json({ err });
     }
