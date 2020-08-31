@@ -11,18 +11,18 @@ const dbConfig = {
    synchronize: true,
    logging: false,
    entities: [
-      "build/app/entity/**/*.js"
+      "src/app/entity/**/*.ts"
    ],
    migrations: [
-      "build/database/migration/**/*.js"
+      "src/database/migration/**/*.ts"
    ],
    subscribers: [
-      "build/subscriber/**/*.js"
+      "src/subscriber/**/*.ts"
    ],
    cli: {
-      entitiesDir: "build/app/entity",
-      migrationsDir: "build/database/migration",
-      subscribersDir: "build/subscriber"
+      entitiesDir: "src/app/entity",
+      migrationsDir: "src/database/migration",
+      subscribersDir: "src/subscriber"
    }
 }
 

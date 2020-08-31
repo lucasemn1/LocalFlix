@@ -10,9 +10,6 @@ export class Season {
   @Column()
   number: number;
 
-  @Column()
-  epsPath: string;
-
   @OneToOne(type => Video, video => video.season)
   videos: Array<Video>
 
