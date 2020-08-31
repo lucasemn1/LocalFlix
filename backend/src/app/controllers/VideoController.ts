@@ -27,7 +27,8 @@ export class VideoController {
         return response.status(404).json({ err: 'Video was not found.' });
       }
 
-      const epPath: string = `${video.season.epsPath}/${video.number}.${video.format}`;
+      const epPath: string = `${video.season.epsPath}\\${video.number}.${video.format}`;
+      console.log(epPath);
 
       fs.stat(epPath, (err, stats) => {
         if (err) {
