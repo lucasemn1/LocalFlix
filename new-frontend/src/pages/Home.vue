@@ -1,19 +1,30 @@
 <template>
   <div id="home">
-    <header id="header">
-      <div id="header-infos">
-        <h1 class="movie-name">{{ featuredMovie.name }}</h1>
-        <div class="movie-details">
-          <span>Lançamento: {{ featuredMovie.year }}</span>
-          <span>Duração: {{ featuredMovie.duration }}</span>
+    <div id="background"></div>
+
+    <div class="container">
+      <header id="header">
+        <div class="featured-movie">
+          <h1>{{ featuredMovie.name }}</h1>
+          <div>
+            <span>Lançamento: {{ featuredMovie.year }}</span>
+            ·
+            <span>Duração: {{ featuredMovie.duration }}</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="lists">
+          <div class="cards-row">
+            <h2>Minha lista</h2>
+            <div class="cards">
+              <Card v-for="(media, index) in myList" v-bind:media="media" :key="index" />
+            </div>
+          </div>
         </div>
       </div>
-      <div id="header-background"></div>
-
-      <div class="cards">
-        <Card v-for="(media, index) in myList" v-bind:media="media" :key="index" />
-      </div>
-    </header>
+    </div>
   </div>
 </template>
 
@@ -28,7 +39,7 @@ export default {
       featuredMovie: {
         name: "Liga da Justiça",
         year: 2017,
-        duration: "2 horas"
+        duration: "2 horas",
       },
 
       myList: [
@@ -40,7 +51,8 @@ export default {
           url: "#",
           image:
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          color: "black"
+          trailer: "3cxixDgHUYw",
+          color: "black",
         },
         {
           id: 2,
@@ -50,7 +62,8 @@ export default {
           url: "#",
           image:
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          color: "black"
+          trailer: "u77M-oANRtQ",
+          color: "black",
         },
         {
           id: 3,
@@ -60,7 +73,8 @@ export default {
           url: "#",
           image:
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          color: "black"
+          trailer: "3cxixDgHUYw",
+          color: "black",
         },
         {
           id: 4,
@@ -70,7 +84,8 @@ export default {
           url: "#",
           image:
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          color: "black"
+          trailer: "u77M-oANRtQ",
+          color: "black",
         },
         {
           id: 5,
@@ -80,7 +95,8 @@ export default {
           url: "#",
           image:
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          color: "black"
+          trailer: "3cxixDgHUYw",
+          color: "black",
         },
         {
           id: 6,
@@ -90,7 +106,8 @@ export default {
           url: "#",
           image:
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          color: "black"
+          trailer: "u77M-oANRtQ",
+          color: "black",
         },
         {
           id: 7,
@@ -100,7 +117,8 @@ export default {
           url: "#",
           image:
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          color: "black"
+          trailer: "3cxixDgHUYw",
+          color: "black",
         },
         {
           id: 8,
@@ -110,38 +128,17 @@ export default {
           url: "#",
           image:
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          color: "black"
-        }
-      ]
+          trailer: "u77M-oANRtQ",
+          color: "black",
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
-<style scoped>
-#header {
-  width: 100%;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#header-infos {
-  height: 600px;
-  width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0), #080808);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  z-index: 101;
-  color: #ffffff;
-  /* backdrop-filter: blur(10px); */
-}
-
-#header-background {
+<style>
+#background {
   background-image: url("../assets/banner.jpg");
   filter: sepia(60%) opacity(50%);
   position: absolute;
@@ -153,30 +150,96 @@ export default {
   top: 0;
 }
 
-.movie-name {
+#header {
+  height: 600px;
+  width: 100%;
+  background-color: red;
+  background: linear-gradient(rgba(0, 0, 0, 0), #080808);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #ffffff;
+  padding: 20px;
+  top: 0px;
+
+}
+
+.container {
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 101;
+}
+
+.content {
+  width: 70%;
+}
+
+.content > div {
+  margin: 20px;
+}
+
+.featured-movie h1 {
   font-size: 77px;
   font-weight: lighter;
 }
 
-.movie-details {
+.featured-movie div {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   font-size: 20px;
   font-weight: bold;
 }
 
-.movie-details > * {
+.featured-movie div > * {
   margin: 10px;
 }
 
-.cards {
-  position: absolute;
-  z-index: 101;
-  margin-top: 800px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+
+.lists {
+  width: 70%;
+  background-color: red;
 }
 
+.cards-row {
+  position: absolute;
+}
+
+.cards-row h2 {
+  color: #ffffff;
+  font-weight: normal;
+  font-size: 18px;
+}
+
+.cards {
+  max-width: 90vw;
+  vertical-align: middle;
+  overflow-x: scroll;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow: auto;
+}
+
+@media (max-width: 700px) {
+  #background {
+    height: 390px;
+    background-size: 150%;
+    background-position: center;
+  }
+
+  #header {
+    height: 390px;
+  }
+
+  .content {
+    width: 100%;
+  }
+}
 </style>

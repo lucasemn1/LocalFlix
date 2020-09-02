@@ -23,7 +23,7 @@
   }
 
   #app {
-    min-height: 100vh;
+    min-height: 300vh;
     background-color: #080808;
   }
 </style>

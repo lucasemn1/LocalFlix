@@ -2,11 +2,17 @@
   <div
     class="card"
     :style="{'background-image': `url('${media.image}')`}"
-    @mouseenter="invertValue()"
-    @mouseout="invertValue()"
+    @mouseenter="hover = true"
+    @mouseleave="hover = false"
   >
-    <div class="card-info" v-if="showName">
-      <h2>{{ media.name }}</h2>
+    <div class="card-info" v-if="hover">
+      <iframe
+        style="width: 100%; height: 100%;"
+        :src="`https://www.youtube.com/embed/${media.trailer}?autoplay=1`"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
 </template>
@@ -15,23 +21,19 @@
 export default {
   name: "Card",
   props: {
-    media: { type: Object }
+    media: { type: Object },
   },
-  methods: {
-    invertValue() {
-      this.showName = !this.showName;
-    }
-  },
+  methods: {},
   data() {
-    return { showName: false };
-  }
+    return { hover: false };
+  },
 };
 </script>
 
 <style>
 .card {
   height: 150px;
-  width: 116.6px;
+  min-width: 116.6px;
   border-radius: 5px;
   margin: 5px;
   background-position: 0 0;
@@ -42,13 +44,14 @@ export default {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 10px;
+  background-color: #000000;
+  flex: 0 0 auto;
 }
 
 .card:hover {
+  transition: 0.4s;
   height: 300px;
-  width: 233.3px;
-  transition: 0.3s;
+  width: 533.3px;
   background-size: auto 100%;
 }
 
@@ -56,9 +59,14 @@ export default {
   color: #ffffff;
   transition: 0.3s;
   font-size: 12px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 5px;
   border-radius: 5px;
+  height: 100%;
+  width: 100%;
 }
 
+@media (max-width: 768px) {
+  .card:hover {
+    width: 90vw;
+  }
+}
 </style>
