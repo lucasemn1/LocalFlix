@@ -4,6 +4,15 @@
 
     <div class="container">
       <header id="header">
+        <nav>
+            <div class="nav-content">
+              <h1 class="hello-user">Boa noite, Lucas!</h1>
+              <button>
+                <img src="../assets/icons/logout.svg" alt />
+              </button>
+            </div>
+        </nav>
+
         <div class="featured-movie">
           <h1>{{ featuredMovie.name }}</h1>
           <div>
@@ -536,17 +545,47 @@ export default {
   top: 0;
 }
 
+nav {
+  width: 100%;
+  background: linear-gradient(#080808, rgba(0, 0, 0, 0));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+nav button {
+  border: none;
+  background: none;
+}
+
+nav button img {
+  height: 20px;
+}
+
+.nav-content {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-content h1 {
+  font-size: 20px;
+  font-weight: normal;
+}
+
 #header {
   height: 600px;
   width: 100%;
   background-color: red;
   background: linear-gradient(rgba(0, 0, 0, 0), #080808);
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   color: #ffffff;
-  padding: 20px;
+  /* padding: 20px; */
   top: 0px;
 }
 
@@ -567,6 +606,13 @@ export default {
 
 .content > div {
   margin: 20px;
+}
+
+.featured-movie {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .featured-movie h1 {
