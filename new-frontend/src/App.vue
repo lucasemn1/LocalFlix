@@ -1,29 +1,36 @@
 <template>
   <div id="app">
-    <Home />
+    <router-view></router-view>
   </div>
 </template>
 
-<script lang="ts">
-  import Home from './pages/Home.vue';
-
-  export default {
-    components: { Home }
-  }
-</script>
-
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;600&display=swap');
-  
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;600&display=swap");
 
-  #app {
-    min-height: 300vh;
-    background-color: #080808;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  padding: 2px;
+  background-color: #464646;
+}
+
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 5px;
+}
+
+body {
+  background-color: #080808;
+}
 </style>

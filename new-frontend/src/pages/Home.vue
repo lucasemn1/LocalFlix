@@ -8,19 +8,45 @@
           <h1>{{ featuredMovie.name }}</h1>
           <div>
             <span>Lançamento: {{ featuredMovie.year }}</span>
-            ·
+            <p>·</p>
             <span>Duração: {{ featuredMovie.duration }}</span>
           </div>
         </div>
       </header>
 
       <div class="content">
-        <div class="lists">
-          <div class="cards-row">
-            <h2>Minha lista</h2>
-            <div class="cards">
-              <Card v-for="(media, index) in myList" v-bind:media="media" :key="index" />
-            </div>
+        <div class="cards-row">
+          <h2>Continue assistindo</h2>
+          <div class="cards">
+            <Card v-for="(media, index) in continueWatching" v-bind:media="media" :key="index" />
+          </div>
+        </div>
+
+        <div class="cards-row">
+          <h2>Minha lista</h2>
+          <div class="cards">
+            <Card v-for="(media, index) in myList" v-bind:media="media" :key="index" />
+          </div>
+        </div>
+
+        <div class="cards-row">
+          <h2>Filmes</h2>
+          <div class="cards">
+            <Card v-for="(media, index) in movies" v-bind:media="media" :key="index" />
+          </div>
+        </div>
+
+        <div class="cards-row">
+          <h2>Séries</h2>
+          <div class="cards">
+            <Card v-for="(media, index) in series" v-bind:media="media" :key="index" />
+          </div>
+        </div>
+
+        <div class="cards-row">
+          <h2>Animes</h2>
+          <div class="cards">
+            <Card v-for="(media, index) in animes" v-bind:media="media" :key="index" />
           </div>
         </div>
       </div>
@@ -42,7 +68,7 @@ export default {
         duration: "2 horas",
       },
 
-      myList: [
+      continueWatching: [
         {
           id: 1,
           name: "Liga da Justiça",
@@ -52,51 +78,57 @@ export default {
           image:
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
           trailer: "3cxixDgHUYw",
+          toWatch: "series/NarutoShippuden/8/187",
           color: "black",
+          type: "movie",
         },
         {
           id: 2,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
+          name: "Vingadores Ultimato",
+          year: 2019,
+          duration: "3 horas",
           url: "#",
           image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
+            "https://lumiere-a.akamaihd.net/v1/images/690x0w_br_9e5801a5.jpeg?region=0%2C0%2C690%2C1035",
+          trailer: "g6ng8iy-l0U",
           color: "black",
+          type: "movie",
         },
         {
           id: 3,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
+          name: "Vingadores Guerra Infinita",
+          year: 2018,
+          duration: "3 horas",
           url: "#",
           image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
+            "https://lh3.googleusercontent.com/RuJhT-qa1vnoFg3lfUZkOR3HQ4OZTjS3Mmz5khe_a-N2CTkb1xQO3tskgRGImB8HB4U",
+          trailer: "t_ULBP6V9bg",
           color: "black",
+          type: "movie",
         },
         {
           id: 4,
-          name: "Liga da Justiça",
-          year: 2017,
+          name: "Dragon Ball Super: Broly",
+          year: 2019,
           duration: "2 horas",
           url: "#",
           image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
+            "https://m.media-amazon.com/images/M/MV5BMjhhMDU5Y2QtMzcyZS00ZGE1LTg3ZjMtMTYyOTM0OTFlYTRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "_K91eeP25NA",
           color: "black",
+          type: "movie",
         },
         {
           id: 5,
-          name: "Liga da Justiça",
-          year: 2017,
+          name: "Homem de Aço",
+          year: 2015,
           duration: "2 horas",
           url: "#",
           image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
+            "https://upload.wikimedia.org/wikipedia/pt/thumb/3/3b/Man_of_Steel%28filme%29.jpg/250px-Man_of_Steel%28filme%29.jpg",
+          trailer: "CP7tgh0bJSI",
           color: "black",
+          type: "movie",
         },
         {
           id: 6,
@@ -108,6 +140,7 @@ export default {
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
           trailer: "u77M-oANRtQ",
           color: "black",
+          type: "movie",
         },
         {
           id: 7,
@@ -119,6 +152,7 @@ export default {
             "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
           trailer: "3cxixDgHUYw",
           color: "black",
+          type: "movie",
         },
         {
           id: 8,
@@ -130,6 +164,358 @@ export default {
             "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
           trailer: "u77M-oANRtQ",
           color: "black",
+          type: "movie",
+        },
+      ],
+
+      myList: [
+        {
+          id: 1,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 2,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 3,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 4,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 5,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 6,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 7,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 8,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+      ],
+
+      animes: [
+        {
+          id: 1,
+          name: "Naruto Shippuden",
+          urlName: "NarutoShippuden",
+          lastWatched: {
+            season: 9,
+            episode: 200,
+          },
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "serie",
+        },
+        {
+          id: 2,
+          name: "Naruto Shippuden",
+          urlName: "NarutoShippuden",
+          lastWatched: {
+            season: 9,
+            episode: 200,
+          },
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "serie",
+        },
+        {
+          id: 3,
+          name: "Naruto Shippuden",
+          urlName: "NarutoShippuden",
+          lastWatched: {
+            season: 9,
+            episode: 200,
+          },
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "serie",
+        },
+      ],
+
+      series: [
+        {
+          id: 1,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 2,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 3,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 4,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 5,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 6,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 7,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 8,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+      ],
+
+      movies: [
+        {
+          id: 1,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 2,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 3,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 4,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 5,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 6,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 7,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 8,
+          name: "Liga da Justiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
+          trailer: "u77M-oANRtQ",
+          color: "black",
+          type: "movie",
         },
       ],
     };
@@ -162,7 +548,6 @@ export default {
   color: #ffffff;
   padding: 20px;
   top: 0px;
-
 }
 
 .container {
@@ -187,6 +572,7 @@ export default {
 .featured-movie h1 {
   font-size: 77px;
   font-weight: lighter;
+  margin: 10px;
 }
 
 .featured-movie div {
@@ -201,14 +587,9 @@ export default {
   margin: 10px;
 }
 
-
 .lists {
   width: 70%;
   background-color: red;
-}
-
-.cards-row {
-  position: absolute;
 }
 
 .cards-row h2 {
@@ -218,8 +599,11 @@ export default {
 }
 
 .cards {
-  max-width: 90vw;
   vertical-align: middle;
+  min-height: 200px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
   overflow-x: scroll;
   display: flex;
   align-items: flex-start;
@@ -236,6 +620,22 @@ export default {
 
   #header {
     height: 390px;
+    align-items: flex-start;
+  }
+
+  .featured-movie h1 {
+    font-size: 44px;
+    text-align: left;
+  }
+
+  .featured-movie div {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 15px;
+  }
+
+  .featured-movie div > p {
+    display: none;
   }
 
   .content {

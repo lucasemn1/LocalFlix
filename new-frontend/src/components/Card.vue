@@ -2,38 +2,59 @@
   <div
     class="card"
     :style="{'background-image': `url('${media.image}')`}"
-    @mouseenter="hover = true"
-    @mouseleave="hover = false"
+    @mouseenter="startTiming()"
+    @mouseleave="stopTiming()"
   >
-    <div class="card-info" v-if="hover">
+    <div class="card-info" v-if="hover" @click="goToVideo()">
       <iframe
-        style="width: 100%; height: 100%;"
         :src="`https://www.youtube.com/embed/${media.trailer}?autoplay=1`"
+        class="video"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
+        name="video"
       ></iframe>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import router from '../router';
+
 export default {
   name: "Card",
   props: {
     media: { type: Object },
   },
-  methods: {},
+  methods: {
+    startTiming() {
+      this.hover = true;
+    },
+
+    stopTiming() {
+      this.hover = false;
+    },
+
+    goToVideo() {
+      if(this.media.type === 'serie') {
+        router.push(`/watch/series/${this.media.urlName}/${this.media.lastWatched.season}/${this.media.lastWatched.episode}`);
+      }
+    }
+  },
   data() {
-    return { hover: false };
+    return {
+      hover: false,
+      focusedSeconds: 0,
+      intervalId: undefined,
+    };
   },
 };
 </script>
 
 <style>
 .card {
-  height: 150px;
-  min-width: 116.6px;
+  height: 200px;
+  min-width: 155.46px;
   border-radius: 5px;
   margin: 5px;
   background-position: 0 0;
@@ -64,7 +85,13 @@ export default {
   width: 100%;
 }
 
-@media (max-width: 768px) {
+.video {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
   .card:hover {
     width: 90vw;
   }
