@@ -6,8 +6,8 @@
       <header id="header">
         <nav>
             <div class="nav-content">
-              <h1 class="hello-user">Boa noite, Lucas!</h1>
-              <button>
+              <h1 class="hello-user">{{ getSaudation() }}, Lucas!</h1>
+              <button @click="logoutAndGoToLogin">
                 <img src="../assets/icons/logout.svg" alt />
               </button>
             </div>
@@ -65,10 +65,45 @@
 
 <script>
 import Card from "../components/Card.vue";
+import { isLogged, logout } from '../services/login';
+import router from '../router';
 
 export default {
   name: "Home",
   components: { Card },
+
+  created() {
+    this.getSaudation();
+  },
+
+  mounted() {
+    if(!isLogged()) {
+      router.push('/login');
+    }
+  },
+
+  methods: {
+    logoutAndGoToLogin() {
+      logout();
+
+      router.push('/login');
+    },
+
+    getSaudation() {
+      const hours = new Date().getHours();
+
+      if(hours >= 5) {
+        return 'Bom dia';
+      }
+      else if(hours >= 12) {
+        return 'Boa tarde';
+      }
+      else if(hours >= 19 || hours <= 5 ) {
+        return 'Boa noite';
+      }
+    }
+  },
+
   data() {
     return {
       featuredMovie: {
@@ -433,6 +468,7 @@ export default {
         {
           id: 1,
           name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
@@ -443,20 +479,22 @@ export default {
           type: "movie",
         },
         {
-          id: 2,
+          id: 1,
           name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
           image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
           color: "black",
           type: "movie",
         },
-        {
-          id: 3,
+        {  
+          id: 1,
           name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
@@ -467,20 +505,9 @@ export default {
           type: "movie",
         },
         {
-          id: 4,
+          id: 1,
           name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 5,
-          name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
@@ -491,20 +518,9 @@ export default {
           type: "movie",
         },
         {
-          id: 6,
+          id: 1,
           name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 7,
-          name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
@@ -515,14 +531,28 @@ export default {
           type: "movie",
         },
         {
-          id: 8,
+          id: 1,
           name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
           year: 2017,
           duration: "2 horas",
           url: "#",
           image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
+          color: "black",
+          type: "movie",
+        },
+        {
+          id: 1,
+          name: "Liga da Justiça",
+          urlName: "LigaDaJustiça",
+          year: 2017,
+          duration: "2 horas",
+          url: "#",
+          image:
+            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
+          trailer: "3cxixDgHUYw",
           color: "black",
           type: "movie",
         },
@@ -568,6 +598,7 @@ nav button img {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 20px;
 }
 
 .nav-content h1 {
@@ -612,6 +643,7 @@ nav button img {
   height: 100%;
   display: flex;
   flex-direction: column;
+  margin: 20px;
   justify-content: center;
 }
 
@@ -664,11 +696,14 @@ nav button img {
     background-position: center;
   }
 
+  .nav-content {
+    width: 100%;
+  }
+
   #header {
     height: 390px;
     align-items: flex-start;
   }
-
   .featured-movie h1 {
     font-size: 44px;
     text-align: left;

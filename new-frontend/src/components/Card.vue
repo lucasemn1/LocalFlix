@@ -39,6 +39,9 @@ export default {
       if(this.media.type === 'serie') {
         router.push(`/watch/series/${this.media.urlName}/${this.media.lastWatched.season}/${this.media.lastWatched.episode}`);
       }
+      else if(this.media.type === 'movie') {
+        router.push(`/watch/movie/${this.media.urlName}`);
+      }
     }
   },
   data() {

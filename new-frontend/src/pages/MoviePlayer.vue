@@ -3,7 +3,7 @@
     <div id="top-bar" v-if="topBarVisible">
       <button class="button" @click="backToHome()">Início</button>
       <div class="info">
-        <h3>Nome da série - temp. 9, ep. 207.</h3>
+        <h3>Nome do filme.</h3>
       </div>
       <div class="actions">
         <button class="button">&lsaquo;</button>
@@ -21,7 +21,7 @@ import { baseAPI } from "../services/api";
 import router from "../router.js";
 
 export default {
-  name: "SeriesPlayer",
+  name: "MoviePlayer",
 
   created() {
     this.deviceType = screen.width < 700? 'mobile': 'desktop';
@@ -30,14 +30,6 @@ export default {
   methods: {
     backToHome() {
       router.push("/");
-    },
-
-    goToNextEpisode() {
-      console.log('Ir para o próximo ep.');
-    },
-
-    goToPreviousEpisode() {
-      console.log('Ir para o próximo ep.');
     },
 
     showTopBar() {
