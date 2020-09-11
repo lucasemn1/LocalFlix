@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
-import { User } from "./User";
-import { Serie } from "./Serie";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
 import { Season } from "./Season";
+import { UserVideo } from "./UserVideo";
 
 @Entity({ name: 'videos' })
 export class Video {
@@ -19,4 +18,7 @@ export class Video {
 
   @ManyToOne(type => Season, season => season.videos)
   season: Season;
+
+  @OneToMany(type => UserVideo, userVideo => userVideo.video)
+  usersVideos: Array<UserVideo>;
 }

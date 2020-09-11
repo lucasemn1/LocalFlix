@@ -27,6 +27,56 @@ export async function getEpisode(serie: string, season: number, ep: number) {
   }
 }
 
+export async function getFirstEpisode(serie: string, season: number) {
+  const connection = await createConnection();
+
+  try{
+    const episode = await connection
+      .getRepository(Video)
+      .createQueryBuilder('videos')
+      .leftJoinAndSelect('videos.season', 'seasons')
+      .leftJoin('seasons.serie', 'series')
+      .where('series.urlName LIKE :urlName', { urlName: serie })
+      .andWhere('seasons.number = :season', { season })
+      .orderBy('videos.number', 'ASC')
+      .limit(1)
+      .getOne();
+
+    await connection.close();
+    return episode;
+  } 
+  catch(err) {
+    console.log(err);
+    await connection.close();
+    return null;
+  }
+}
+
+export async function getLastWatchedEpisode(serie: string, username: string) {
+  const connection = await createConnection();
+
+  try {
+    const video = await connection.getRepository(Video)
+      .createQueryBuilder('videos')
+      .leftJoinAndSelect('videos.season', 'seasons')
+      .leftJoin('seasons.serie', 'series')
+      .leftJoin('videos.usersVideos', 'usersVideos')
+      .leftJoin('usersVideos.user', 'users')
+      .where(`series.urlName LIKE :urlName`, { urlName: serie })
+      .andWhere('users.nickname LIKE :nickname', { nickname: username })
+      .orderBy('usersVideos.createdAt', 'DESC')
+      .getOne();
+
+    await connection.close();
+    return video;
+  }
+  catch (err) {
+    console.log(err);
+    await connection.close();
+    return null;
+  }
+}
+
 export async function getNextEpisode(serie: string, season: number, ep: number) {
   let nextEp = { urlName: serie, season, episode: ep };
 

@@ -1,5 +1,5 @@
 import { SeasonEps as ISeasonEps } from '../interfaces/SeasonEps';
-import { createConnection, getConnection, getConnectionManager } from 'typeorm';
+import { createConnection } from 'typeorm';
 import { Season } from '../entity/Season';
 
 export class SeasonRepository {
