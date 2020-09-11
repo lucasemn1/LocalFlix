@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
-import { createConnection } from 'typeorm';
-import { Serie } from '../entity/Serie';
-import { SeasonRepository } from '../repository/SeasonRepository';
-import { SeasonEps as ISeasonEps } from '../interfaces/SeasonEps';
-import { getEpisode } from '../repository/SeriesRepository';
+import { getEpisode, getNextEpisode, getPreviousEpisode } from '../repository/EpisodeRepository';
 import { startStream } from '../../util/stream';
+import { listAll } from '../repository/SerieRepository';
 
 export class SerieController {
   static async watch(request: Request, response: Response): Promise<Response> {
@@ -22,18 +19,16 @@ export class SerieController {
 
     startStream(request, response, epPath);
   }
-
+  
   static async listAll(request: Request, response: Response): Promise<Response> {
-    const connection = await createConnection();
+    const { username } = request.headers;
 
     try {
-      const series = await connection.getRepository(Serie).find({ relations: ['seasons'] });
+      const series = await listAll(String(username));
 
-      await connection.close();
       return response.status(200).json(series);
     }
     catch (err) {
-      await connection.close();
       return response.status(500).json({ err });
     }
   }
@@ -41,74 +36,24 @@ export class SerieController {
   static async nextEpisode(request: Request, response: Response) {
     const { serie, season, ep } = request.params;
 
-    let nextEp = { urlName: serie, season: Number(season), episode: Number(ep) };
+    const nextEp = await getNextEpisode(serie, Number(season), Number(ep));
 
-    try {
-      let seasonEps: Array<ISeasonEps> = await SeasonRepository.getSeasonEps(nextEp.urlName, Number(nextEp.season));
-      seasonEps = seasonEps.sort((a, b) => { return a.videos_number - b.videos_number });
-
-      if (seasonEps.filter(seasonEp => seasonEp.videos_number === nextEp.episode).length !== 0) {
-        if (Number(nextEp.episode) < seasonEps[seasonEps.length - 1].videos_number) {
-          nextEp.episode++;
-        }
-        else {
-          seasonEps = await SeasonRepository.getSeasonEps(nextEp.urlName, Number(season) + 1);
-
-          if (seasonEps.length === 0) {
-            nextEp.episode = 0;
-            nextEp.season = 0;
-          }
-          else {
-            nextEp.episode++;
-            nextEp.season++;
-          }
-        }
-
-        return response.json(nextEp);
-      }
-      else {
-        return response.status(404).json({ err: 'This episode does not belong to this season' });
-      }
+    if(!nextEp) {
+      return response.status(404).json({ err: 'This is the last episode of this series' })
     }
-    catch (err) {
-      return response.status(500).json({ err });
-    }
+
+    return response.status(200).json(nextEp);
   }
 
   static async previousEpisode(request: Request, response: Response) {
     const { serie, season, ep } = request.params;
 
-    let nextEp = { urlName: serie, season: Number(season), episode: Number(ep) };
+    const previousEp = await getPreviousEpisode(serie, Number(season), Number(ep));
 
-    try {
-      let seasonEps: Array<ISeasonEps> = await SeasonRepository.getSeasonEps(nextEp.urlName, Number(nextEp.season));
-      seasonEps = seasonEps.sort((a, b) => { return a.videos_number - b.videos_number });
-
-      if (seasonEps.filter(seasonEp => seasonEp.videos_number === nextEp.episode).length !== 0) {
-        if (Number(nextEp.episode) < seasonEps[seasonEps.length - 1].videos_number) {
-          nextEp.episode--;
-        }
-        else {
-          seasonEps = await SeasonRepository.getSeasonEps(nextEp.urlName, Number(season) - 1);
-
-          if (seasonEps.length === 0) {
-            nextEp.episode = 0;
-            nextEp.season = 0;
-          }
-          else {
-            nextEp.episode--;
-            nextEp.season--;
-          }
-        }
-
-        return response.json(nextEp);
-      }
-      else {
-        return response.status(404).json({ err: 'This episode does not belong to this season' });
-      }
+    if(!previousEp) {
+      return response.status(404).json({ err: 'This is the first episode of this series' })
     }
-    catch (err) {
-      return response.status(500).json({ err });
-    }
+
+    return response.status(200).json(previousEp);
   }
 }
