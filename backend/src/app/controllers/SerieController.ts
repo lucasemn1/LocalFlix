@@ -9,13 +9,13 @@ export class SerieController {
     const { ep } = request.params;
     const { season } = request.params;
 
-    const video = await getEpisode(serie, Number(season), Number(ep));
+    const episode = await getEpisode(serie, Number(season), Number(ep));
 
-    if (!video) {
-      return response.status(404).json({ err: 'Video was not found.' });
+    if (!episode) {
+      return response.status(404).json({ err: 'episode was not found.' });
     }
 
-    const epPath: string = `${video.season.serie.seasonsPath}/${video.season.number}/${video.number}.${video.format}`;
+    const epPath: string = `${episode.season.serie.seasonsPath}/${episode.season.number}/${episode.number}.${episode.format}`;
 
     startStream(request, response, epPath);
   }

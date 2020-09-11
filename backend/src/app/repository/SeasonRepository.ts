@@ -12,7 +12,7 @@ export class SeasonRepository {
         .select('seasons.number')
         .from(Season, 'seasons')
         .leftJoinAndSelect('seasons.serie', 'series')
-        .leftJoinAndSelect('seasons.videos', 'videos')
+        .leftJoinAndSelect('seasons.episodes', 'episodes')
         .where('series.urlName LIKE :urlName', { urlName })
         .andWhere('seasons.number = :season', { season })
         .execute();

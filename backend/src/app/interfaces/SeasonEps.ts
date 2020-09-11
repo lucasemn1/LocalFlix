@@ -5,9 +5,9 @@ export interface SeasonEps {
   series_thumbnail: String,
   series_urlName: String,
   series_seasonsPath: String,
-  videos_id: number,
-  videos_title: String,
-  videos_number: number,
-  videos_format: String,
-  videos_seasonId: number
+  episodes_id: number,
+  episodes_title: String,
+  episodes_number: number,
+  episodes_format: String,
+  episodes_seasonId: number
 }

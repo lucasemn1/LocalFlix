@@ -1,17 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne } from "typeorm";
 import { User } from "./User";
-import { Video } from "./Video";
+import { Episode } from "./Episode";
 
-@Entity({ name: 'usersVideos' })
-export class UserVideo {
+@Entity({ name: 'usersEpisodes' })
+export class UserEpisode {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(type => User, user => user.usersVideos)
+  @ManyToOne(type => User, user => user.usersEpisodes)
   user: User;
 
-  @ManyToOne(type => Video, video => video.usersVideos)
-  video: Video;
+  @ManyToOne(type => Episode, video => video.usersEpisodes)
+  episode: Episode;
 
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
   createdAt: string;

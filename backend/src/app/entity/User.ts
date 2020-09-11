@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from "typeorm";
-import { Video } from "./Video";
-import { UserVideo } from "./UserVideo";
+import { Episode } from "./Episode";
+import { UserEpisode } from "./UserEpisode";
 
 @Entity({ name: 'users' })
 export class User {
@@ -13,10 +13,10 @@ export class User {
   @Column()
   nickname: string;
 
-  @ManyToMany(type => Video, {  })
-  videosWatched: Array<Video>;
+  @ManyToMany(type => Episode, {  })
+  episodesWatched: Array<Episode>;
 
-  @OneToMany(type => UserVideo, userVideo => userVideo.user)
+  @OneToMany(type => UserEpisode, userEpisode => userEpisode.user)
   @JoinTable()
-  usersVideos: Array<UserVideo>;
+  usersEpisodes: Array<UserEpisode>;
 }

@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
 import { Season } from "./Season";
-import { UserVideo } from "./UserVideo";
+import { UserEpisode } from "./UserEpisode";
 
-@Entity({ name: 'videos' })
-export class Video {
+@Entity({ name: 'episodes' })
+export class Episode {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -16,9 +16,9 @@ export class Video {
   @Column()
   format: string;
 
-  @ManyToOne(type => Season, season => season.videos)
+  @ManyToOne(type => Season, season => season.episodes)
   season: Season;
 
-  @OneToMany(type => UserVideo, userVideo => userVideo.video)
-  usersVideos: Array<UserVideo>;
+  @OneToMany(type => UserEpisode, userEpisode => userEpisode.episode)
+  usersEpisodes: Array<UserEpisode>;
 }

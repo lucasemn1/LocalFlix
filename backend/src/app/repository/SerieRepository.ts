@@ -2,7 +2,7 @@ import { createConnection } from "typeorm";
 import { Serie } from "../entity/Serie";
 import { getLastWatchedEpisode, getFirstEpisode } from './EpisodeRepository';
 import { Season } from "../entity/Season";
-import { Video } from "../entity/Video";
+import { Episode } from "../entity/Episode";
 
 export async function listAll(username: string) {
   const connection = await createConnection();
@@ -13,7 +13,7 @@ export async function listAll(username: string) {
     const series = [];
 
     for(const serieAvaliable of seriesAvaliable) {
-      let toWatch: Video = await getLastWatchedEpisode(serieAvaliable.urlName, username);
+      let toWatch: Episode = await getLastWatchedEpisode(serieAvaliable.urlName, username);
 
       if(!toWatch) {
         const firstSeason = await getFirstSeason(serieAvaliable.urlName);

@@ -11,8 +11,8 @@ export class SeriesInfoController {
     try {
       const epsWatched = await connection.getRepository(User)
         .createQueryBuilder('users')
-        .leftJoinAndSelect('users.videosWatched', 'videos')
-        .leftJoinAndSelect('videos.season', 'seasons')
+        .leftJoinAndSelect('users.episodesWatched', 'episodes')
+        .leftJoinAndSelect('episodes.season', 'seasons')
         .leftJoinAndSelect('seasons.serie', 'series')
         .where('users.nickname LIKE :username', { username })
         .andWhere('series.urlName LIKE :serie', { serie })
