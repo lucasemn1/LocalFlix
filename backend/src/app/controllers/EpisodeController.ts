@@ -1,8 +1,17 @@
-import { getEpisode, getNextEpisode, getPreviousEpisode } from '../repository/EpisodeRepository';
+import { getEpisode, getNextEpisode, getPreviousEpisode, getLastWatchedEpisode } from '../repository/EpisodeRepository';
 import { Request, Response } from 'express';
 
 export class EpisodeController {
   static async get(request: Request, response: Response) {
+
+    // const { serie } = request.params;
+    // const { username } = request.headers;
+
+    // const videos = await getLastWatchedEpisode(serie, username.toString());
+
+    // return response.json(videos);
+
+    
     const { serie, season, ep } = request.params;
 
     const episode = await getEpisode(serie, Number(season), Number(ep));
