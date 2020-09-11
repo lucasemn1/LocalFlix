@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { createConnection } from 'typeorm';
-import { Video } from '../entity/Video';
 import { User } from '../entity/User';
 
 export class SeriesInfoController {
