@@ -1,5 +1,5 @@
 export function isLogged() {
-  const login = localStorage.getItem('login');
+  const login = localStorage.getItem('username');
 
   if( !login ) {
     return false;
@@ -10,9 +10,9 @@ export function isLogged() {
 }
 
 export function login(username) {
-  localStorage.setItem('login', username);
+  localStorage.setItem('username', username);
 }
 
 export function logout() {
-  localStorage.removeItem('login');
+  localStorage.removeItem('username');
 }
