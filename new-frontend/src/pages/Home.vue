@@ -6,10 +6,16 @@
       <header id="header">
         <nav>
             <div class="nav-content">
-              <h1 class="hello-user">{{ getSaudation() }}, Lucas!</h1>
-              <button @click="logoutAndGoToLogin">
-                <img src="../assets/icons/logout.svg" alt />
-              </button>
+              <img src="../assets/logo.png" class="logo" alt="Logo">
+
+              <div>
+                <h1 class="hello-user">{{ getSaudation() }}, Lucas!</h1>
+
+                <button @click="logoutAndGoToLogin">
+                  <img src="../assets/icons/logout.svg" alt />
+                  Sair
+                </button>
+              </div>
             </div>
         </nav>
 
@@ -24,33 +30,6 @@
       </header>
 
       <div class="content">
-        <div class="cards-row">
-          <h2>Continue assistindo</h2>
-          <div class="cards">
-            <Card v-for="(media, index) in continueWatching" v-bind:media="media" :key="index" />
-          </div>
-        </div>
-
-        <div class="cards-row">
-          <h2>Minha lista</h2>
-          <div class="cards">
-            <Card v-for="(media, index) in myList" v-bind:media="media" :key="index" />
-          </div>
-        </div>
-
-        <div class="cards-row">
-          <h2>Filmes</h2>
-          <div class="cards">
-            <Card v-for="(media, index) in movies" v-bind:media="media" :key="index" />
-          </div>
-        </div>
-
-        <div class="cards-row">
-          <h2>Séries</h2>
-          <div class="cards">
-            <Card v-for="(media, index) in series" v-bind:media="media" :key="index" />
-          </div>
-        </div>
 
         <div class="cards-row">
           <h2>Animes</h2>
@@ -66,6 +45,7 @@
 <script>
 import Card from "../components/Card.vue";
 import { isLogged, logout } from '../services/login';
+import { api } from '../services/api';
 import router from '../router';
 
 export default {
@@ -80,6 +60,13 @@ export default {
     if(!isLogged()) {
       router.push('/login');
     }
+
+    const username = localStorage.getItem('username');
+
+    api.get('/series', { headers: { 'username': username } })
+      .then(response => {
+        this.animes = response.data;
+      })
   },
 
   methods: {
@@ -102,6 +89,8 @@ export default {
         return 'Boa noite';
       }
     }
+
+    
   },
 
   data() {
@@ -311,158 +300,9 @@ export default {
         },
       ],
 
-      animes: [
-        {
-          id: 1,
-          name: "Naruto Shippuden",
-          urlName: "NarutoShippuden",
-          lastWatched: {
-            season: 9,
-            episode: 200,
-          },
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "serie",
-        },
-        {
-          id: 2,
-          name: "Naruto Shippuden",
-          urlName: "NarutoShippuden",
-          lastWatched: {
-            season: 9,
-            episode: 200,
-          },
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "serie",
-        },
-        {
-          id: 3,
-          name: "Naruto Shippuden",
-          urlName: "NarutoShippuden",
-          lastWatched: {
-            season: 9,
-            episode: 200,
-          },
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://media.fstatic.com/lvMZVJHq3-EcuFjKAGy-RU1VqHI=/fit-in/640x480/smart/media/movies/covers/2011/07/c4d7d0a7453bb2edca07609ac9f9918a.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "serie",
-        },
-      ],
+      animes: [],
 
-      series: [
-        {
-          id: 1,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 2,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 3,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 4,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 5,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 6,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 7,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.pinimg.com/originals/18/6e/3b/186e3b3847e70104eb6ae7f6abf4b0b9.jpg",
-          trailer: "3cxixDgHUYw",
-          color: "black",
-          type: "movie",
-        },
-        {
-          id: 8,
-          name: "Liga da Justiça",
-          year: 2017,
-          duration: "2 horas",
-          url: "#",
-          image:
-            "https://i.uai.com.br/3UU_3GdSVUsZmEKXJawZxjPO0dk=/750x0/imgsapp2.uai.com.br/app/noticia_133890394703/2019/11/18/253288/20191118165915959374o.jpg",
-          trailer: "u77M-oANRtQ",
-          color: "black",
-          type: "movie",
-        },
-      ],
+      series: [],
 
       movies: [
         {
@@ -563,6 +403,11 @@ export default {
 </script>
 
 <style>
+#home {
+  animation-name: fade;
+  animation-duration: 0.2s;
+}
+
 #background {
   background-image: url("../assets/banner.jpg");
   filter: sepia(60%) opacity(50%);
@@ -586,11 +431,21 @@ nav {
 
 nav button {
   border: none;
-  background: none;
+  background-color: #000000;
+  height: min-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #ffffff;
+  width: 70px;
+  height: 40px;
+  font-size: 16px;
 }
 
 nav button img {
   height: 20px;
+  margin-right: 5px;
 }
 
 .nav-content {
@@ -601,9 +456,20 @@ nav button img {
   margin: 20px;
 }
 
-.nav-content h1 {
+.nav-content .logo {
+  width: 120px;
+}
+
+.nav-content > div {
+  display: flex;
+  align-items: center;
+}
+
+.nav-content > div h1 {
+  display: inline-block;
   font-size: 20px;
   font-weight: normal;
+  margin-right: 20px;
 }
 
 #header {
@@ -722,5 +588,11 @@ nav button img {
   .content {
     width: 100%;
   }
+
+  .nav-content .logo {
+    width: 100px;
+  }
 }
+
+
 </style>
