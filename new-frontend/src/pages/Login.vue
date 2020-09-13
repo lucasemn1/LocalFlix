@@ -1,91 +1,120 @@
 <template>
   <div class="page">
+    <div class="form-area">
+      <img src="../assets/logo.png" class="logo" alt="Logo" />
+      <h1>Fazer login</h1>
+
       <form @submit="handleSubmit">
-          <input type="text" placeholder="Username" v-model="username">
-          <button type="submit">Fazer login</button>
+        <input type="text" placeholder="Usuário" v-model="username" />
+        <button type="submit">Fazer login</button>
       </form>
+    </div>
   </div>
 </template>
 
 <script>
-import router from '../router';
+import router from "../router";
+import { api } from '../services/api';
 import { login } from '../services/login';
 
 export default {
-    methods: {
-        login,
+  methods: {
+    async handleSubmit(e) {
+      e.preventDefault();
 
-        handleSubmit(e) {
-            e.preventDefault();
-            this.login();
+      const username = this.username;
 
-            router.push('/');
+      api.post('/login', { username }, { 
+        headers: { 
+          'Content-Type': 'Application/json',
         }
+      }).then(() => {
+        login(username);
+        router.push("/");
+
+      }).catch(() => {
+        alert('Usuário inválido.');
+      });
     },
+  },
 
-    data() {
-        return {
-            username: '',
-        }
-    }
-}
+  data() {
+    return {
+      username: "",
+    };
+  },
+};
 </script>
 
 <style>
 .page {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-area {
+  background-color: rgba(116, 113, 113, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+.logo {
+  width: 80%;
+}
+
+h1 {
+  margin: 20px 0;
+  font-weight: normal;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 form {
-    background-color: rgba(116, 113, 113, 0.1);
-    border-radius: 5px;
-    height: 200px;
-    padding: 20px;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
 }
 
 form input {
-    padding: 10px;
-    border-radius: 3px;
-    height: 40px;
-    width: 100%;
-    border: none;
-    margin: 10px 0;
-    font-size: 14px;
-    font-family: "Roboto", sans-serif;
-    background-color: rgba(177, 177, 177, 0.1);
-    color: #ffffff;
-    text-align: center;
+  padding: 10px;
+  border-radius: 3px;
+  height: 40px;
+  width: 100%;
+  border: none;
+  margin: 10px 0;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(177, 177, 177, 0.1);
+  color: #ffffff;
+  text-align: center;
 }
 
 form input::placeholder {
-    font-weight: bold;
-    font-style: italic;
+  font-weight: bold;
+  font-style: italic;
 }
 
 form button {
-    width: 100%;
-    height: 40px;
-    background-color: #45108a;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 14px;
-    border: none;
-    transition: 0.1s;
+  width: 100%;
+  height: 40px;
+  background-color: #622aa8;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  border: none;
+  transition: 0.1s;
 }
 
 form button:active {
-    background-color: #2b0957;
-    font-size: 13px;
-    transition: 0.1s;
+  background-color: #2b0957;
+  font-size: 13px;
+  transition: 0.1s;
 }
-
 </style>
