@@ -1,9 +1,9 @@
 <template>
-  <div @mousemove="showTopBar()">
+  <div id="series-player" @mousemove="showTopBar()">
     <div id="top-bar" v-if="topBarVisible">
       <button class="button" @click="backToHome()">Início</button>
       <div class="info">
-        <h3>Nome da série - temp. 9, ep. 207.</h3>
+        <h3>{{ serieName }} - temp. {{ season }}, ep. {{ episode }}.</h3>
       </div>
       <div class="actions">
         <button class="button">&lsaquo;</button>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { baseAPI } from "../services/api";
+import { baseAPI, api } from "../services/api";
 import router from "../router.js";
 
 export default {
@@ -55,12 +55,21 @@ export default {
     this.serieName = this.$route.params.serieName;
     this.season = this.$route.params.season;
     this.episode = this.$route.params.episode;
+
+    const username = localStorage.getItem('username');
+
+    api.get(`/series/next-ep/${this.serieName}/${this.episode}/${this.episode}`, { headers: { username } })
+      .then(response => {
+        console.log(response.data);
+      });
   },
 
   data: () => {
     return {
       topBarVisible: false,
       deviceType: 'desktop',
+      nextEp: null,
+      previousEp: null,
       serieName: null,
       season: null,
       episode: null,
@@ -71,6 +80,11 @@ export default {
 </script>
 
 <style>
+#series-player { 
+  animation-name: fade;
+  animation-duration: 0.2s;
+}
+
 #top-bar {
   position: fixed;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
