@@ -33,4 +33,13 @@
 body {
   background-color: #080808;
 }
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 </style>
