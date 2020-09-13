@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm';
 import { User } from '../app/entity/User';
 
-export async function isLoginValid(username: string) {
+export async function getUserFromUsername(username: string) {
   const connection = await createConnection();
 
   try{
@@ -12,11 +12,20 @@ export async function isLoginValid(username: string) {
       .getOne();
 
     await connection.close()
-    return user ? true: false;
+    return user;
   }
   catch(err) {
     console.log(err);
     await connection.close();
+    return false;
+  }
+}
+
+export async function isLoginValid(username: string) {
+  if(await getUserFromUsername(username)) {
+    return true;
+  }
+  else {
     return false;
   }
 }
