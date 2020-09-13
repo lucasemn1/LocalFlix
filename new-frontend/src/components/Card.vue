@@ -1,7 +1,7 @@
 <template>
   <div
     class="card"
-    :style="{'background-image': `url('${media.image}')`}"
+    :style="{'background-image': `url('${baseAPI}/public/series/${this.media.serie.urlName}/${this.media.serie.thumbnail}')`}"
     @mouseenter="startTiming()"
     @mouseleave="stopTiming()"
   >
@@ -20,11 +20,17 @@
 
 <script lang="ts">
 import router from '../router';
+import { baseAPI } from '../services/api';
+
 
 export default {
   name: "Card",
   props: {
     media: { type: Object },
+  },
+  mounted() {
+    console.log(this.media);
+    console.log(`${baseAPI}/public/${this.media.serie.urlName}/${this.media.serie.thumbnail}`);
   },
   methods: {
     startTiming() {
@@ -36,16 +42,12 @@ export default {
     },
 
     goToVideo() {
-      if(this.media.type === 'serie') {
-        router.push(`/watch/series/${this.media.urlName}/${this.media.lastWatched.season}/${this.media.lastWatched.episode}`);
-      }
-      else if(this.media.type === 'movie') {
-        router.push(`/watch/movie/${this.media.urlName}`);
-      }
+      router.push(`/watch/series/${this.media.serie.urlName}/${this.media.watch.season.number}/${this.media.watch.number}`);
     }
   },
   data() {
     return {
+      baseAPI,
       hover: false,
       focusedSeconds: 0,
       intervalId: undefined,
