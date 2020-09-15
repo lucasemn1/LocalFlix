@@ -56,6 +56,7 @@ export default {
           router.push('/');
         })
         .catch(() => {
+          // eslint-disable-next-line no-alert
           alert('Usuário inválido.');
         });
     },
@@ -72,17 +73,5 @@ export default {
 <style>
 .logo {
   width: 80%;
-}
-
-form input {
-}
-
-form input::placeholder {
-}
-
-form button {
-}
-
-form button:active {
 }
 </style>

@@ -31,7 +31,7 @@
     "*/**/*.tsx",
     "*/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", "src/pages/Login/style.js"
   ],
   "exclude": [
     "node_modules"

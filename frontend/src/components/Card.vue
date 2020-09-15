@@ -8,7 +8,7 @@
     @mouseenter="startTiming()"
     @mouseleave="stopTiming()"
   >
-    <div class="card-info" v-if="hover" @click="goToVideo()">
+    <div class="card-info" v-if="hover" @click="goToVideo(this.media)">
       <iframe
         :src="`https://www.youtube.com/embed/${media.trailer}?autoplay=1`"
         class="video"
@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import router from '../router';
 import { baseAPI } from '../services/api';
 

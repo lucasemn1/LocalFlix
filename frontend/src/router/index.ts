@@ -1,30 +1,17 @@
-
 import Vue from 'vue';
 import Router from 'vue-router';
+import LocalFlixRoutes from '../pages/LocalFlix/routes';
+import { Route } from '../interfaces/Route';
 
 Vue.use(Router);
 
-const routes = [
+const routes: Route[] = [
   {
     path: '/login',
+    name: 'Login',
     component: () => import('../pages/Login/index.vue'),
   },
-  {
-    path: '/',
-    component: () => import('../pages/Home.vue'),
-  },
-  {
-    path: '/watch/series/:serieName/:season/:episode',
-    component: () => import('../pages/MoviePlayer.vue'),
-  },
-  {
-    path: '/watch/movie/:movieName',
-    component: () => import('../pages/MoviePlayer.vue'),
-  },
-  {
-    path: '*',
-  },
+  ...LocalFlixRoutes,
 ];
 
 export default new Router({ routes, mode: 'history' });
-
