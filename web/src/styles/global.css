@@ -25,6 +25,8 @@
     --background-contrast-color-2: var(--dark-contrast-color-2);
 
     --primary-color: #FB4A4A;
+
+    --sidenav-width: 257px;
 }
 
 * {
@@ -36,5 +38,11 @@
 }
 
 body {
-    background-color: var(--background-color)
+    background-color: var(--background-color);
+}
+
+@media(max-width: 768px) {
+    :root {
+        --sidenav-width: 100%;
+    }
 }

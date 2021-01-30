@@ -9,6 +9,11 @@ import '@/styles/layout.css';
 import '@/styles/inputs.css';
 import '@/styles/buttons.css';
 
+// if(screen.width > 768) {
+//   store.commit('changeSidenavVisible');
+//   console.log(store.state.showSidenav)
+// }
+
 Vue.config.productionTip = false
 
 new Vue({

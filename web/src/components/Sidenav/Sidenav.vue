@@ -1,5 +1,5 @@
 <template>
-  <div class="sidenav">
+  <div id="sidenav" :class="`sidenav hidden-sidenav`">
     <input type="text" placeholder="Buscar" name="buscar" />
 
     <ul>
@@ -180,16 +180,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    if(screen.width <= 768) {
+      document.getElementById('sidenav').classList.add('hidden-sidenav');
+    }
+  }
+};
 </script>
 
 <style scoped>
 .sidenav {
-  width: 257px;
+  width: var(--sidenav-width);
   height: 100vh;
   padding: 33px;
-  position: fixed;
   background-color: var(--background-secondary-color);
+  position: fixed;
+  z-index: 3;
+}
+
+.hidden-sidenav {
+  left: calc(var(--sidenav-width) * -1);
+  display: none;
 }
 
 ul {
@@ -221,13 +233,22 @@ li:not(:first-child) {
   font-size: 16px;
 }
 
+
 @media (max-width: 768px) {
   .sidenav {
     width: 100%;
   }
 
+
   ul {
     margin-top: 30px;
   }
+}
+</style>
+
+<style>
+
+.hidden-sidenav .content {
+  width: 100%;
 }
 </style>
