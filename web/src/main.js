@@ -6,6 +6,7 @@ import store from './store'
 
 import '@/styles/global.css';
 import '@/styles/layout.css';
+import '@/styles/typography.css';
 import '@/styles/inputs.css';
 import '@/styles/buttons.css';
 import '@/styles/animations.css';
