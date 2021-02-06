@@ -1,0 +1,27 @@
+@keyframes show-sidenav {
+    0% {
+        left: calc(var(--sidenav-width) * -1);
+        visibility: hidden;
+        opacity: 0%;
+    }
+
+    100% {
+        left: 0;
+        visibility: visible;
+        opacity: 100%;
+    }
+}
+
+@keyframes hide-sidenav {
+    0% {
+        left: 0;
+        visibility: visible;
+        opacity: 100%;
+    }
+    
+    100% {
+        left: calc(var(--sidenav-width) * -1);
+        visibility: hidden;
+        opacity: 0%;
+    }
+}

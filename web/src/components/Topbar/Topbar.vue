@@ -12,8 +12,16 @@ nav {
   left: var(--sidenav-width);
   width: calc(100% - var(--sidenav-width));
   height: 65px;
-  padding: 18px 26px;
+  padding: 0 26px;
   z-index: 3;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.full-content {
+  left: 0;
+  width: 100%;
 }
 
 .toggle-button {

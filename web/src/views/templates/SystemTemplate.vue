@@ -25,17 +25,20 @@ export default {
       const sidenav = document.getElementById('sidenav');
       const topbar = document.getElementById('topbar');
       const contents = Array.from(document.getElementsByClassName('content'));
-      // sidenav.classList.toggle('hidden-sidenav');
-
-      // console.log(sidenav.classList.contains('hidden-sidenav'));
 
       if(sidenav.classList.contains('hidden-sidenav')) {
+        sidenav.classList.remove('hiding-sidenav');
         sidenav.classList.remove('hidden-sidenav');
         topbar.classList.remove('full-content');
         contents.forEach(content => content.classList.remove('full-content'));
       }
       else {
-        sidenav.classList.add('hidden-sidenav');
+        sidenav.classList.add('hiding-sidenav');
+
+        setTimeout(() => {
+          sidenav.classList.add('hidden-sidenav');
+        }, 500);
+
         topbar.classList.add('full-content');
         contents.forEach(content => content.classList.add('full-content'));
       }

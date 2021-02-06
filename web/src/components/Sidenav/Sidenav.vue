@@ -197,11 +197,19 @@ export default {
   background-color: var(--background-secondary-color);
   position: fixed;
   z-index: 3;
+  animation-name: show-sidenav;
+  animation-duration: 0.5s;
 }
 
 .hidden-sidenav {
   left: calc(var(--sidenav-width) * -1);
   display: none;
+}
+
+.hiding-sidenav {
+  animation-name: hide-sidenav;
+  animation-duration: 0.5s;
+  visibility: hidden;
 }
 
 ul {
